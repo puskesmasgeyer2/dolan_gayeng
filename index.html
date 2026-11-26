@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dolan Gayeng Bareng — UPTD Puskesmas Geyer 2</title>
+<style>
+:root{--green:#176b2d;--lime:#8bcf35;--dark:#12351d;--cream:#fffdf3;--orange:#f4a326;--blue:#168bc1}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Inter,Arial,sans-serif;background:#102b19;color:#fff;overflow:hidden}
+.deck{height:100%;width:100%;position:relative}.slide{position:absolute;inset:0;display:none;padding:5.5vh 6vw 8vh;overflow:hidden;background:linear-gradient(135deg,#0d5127,#1d8b3b 58%,#b3d94b)}
+.slide.active{display:flex;flex-direction:column;justify-content:center;animation:appear .35s ease}
+@keyframes appear{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:none}}
+.slide:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 12%,#ffffff25,transparent 28%),radial-gradient(circle at 4% 90%,#d5ff6b35,transparent 28%);pointer-events:none}
+.slide>*{position:relative;z-index:1}.eyebrow{font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#eaffc7;font-size:clamp(12px,1.3vw,18px)}
+h1{font-size:clamp(42px,7.2vw,100px);line-height:.98;margin:.18em 0;color:#fff;text-shadow:0 5px 0 #155a26,0 9px 20px #052b16aa;letter-spacing:-.045em}
+h2{font-size:clamp(30px,4.6vw,62px);line-height:1.05;margin:.2em 0 .45em;letter-spacing:-.035em}
+p{font-size:clamp(17px,2vw,26px);line-height:1.45;margin:.35em 0;color:#f5ffe9}
+.pill{display:inline-flex;align-items:center;gap:10px;background:var(--cream);color:var(--dark);padding:12px 22px;border-radius:999px;font-weight:900;font-size:clamp(16px,2vw,25px);box-shadow:0 7px 0 #d3e6b7}
+.hero{background:#164f28}.hero .poster{position:absolute;right:5%;top:7%;height:86%;width:auto;max-width:42%;object-fit:contain;border-radius:24px;box-shadow:0 18px 55px #001b0c99;border:5px solid #fff}
+.hero .copy{max-width:56%}.hero h1{font-size:clamp(48px,7vw,94px)}.hero .date{margin-top:28px}
+.tag{display:inline-block;background:#f4a326;color:#3d2608;padding:8px 15px;border-radius:14px;font-weight:900;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:14px}
+.tile{background:#ffffffed;color:#16371e;border-radius:22px;padding:22px 24px;box-shadow:0 8px 0 #0b5428aa;min-height:145px}
+.tile small{display:block;color:#478047;font-weight:900;letter-spacing:.1em;font-size:clamp(11px,1.1vw,15px);margin-bottom:8px}
+.tile strong{font-size:clamp(21px,2.6vw,34px);line-height:1.12;display:block}
+.tile span{display:block;margin-top:8px;font-size:clamp(14px,1.5vw,19px);line-height:1.3}
+.timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px}
+.event{display:grid;grid-template-columns:120px 1fr;gap:15px;align-items:center;background:#fff;color:#15391e;border-radius:17px;padding:14px 18px;box-shadow:0 5px 0 #0c5729aa}
+.time{font-weight:1000;color:#176b2d;font-size:clamp(16px,1.8vw,24px);white-space:nowrap}
+.event strong{font-size:clamp(15px,1.7vw,22px);line-height:1.18;display:block}.event small{font-size:clamp(12px,1.25vw,16px);color:#527257;display:block;margin-top:4px}
+.note{margin-top:20px;background:#ffefc8;color:#57390c;border-left:7px solid var(--orange);padding:16px 20px;border-radius:13px;font-weight:800;font-size:clamp(15px,1.7vw,22px)}
+.bigtime{font-size:clamp(56px,9vw,120px);font-weight:1000;line-height:1;color:#fff;text-shadow:0 6px #125524}
+.footer{position:absolute;bottom:3.1vh;left:6vw;right:6vw;display:flex;justify-content:space-between;align-items:center;color:#efffe4;font-size:13px;font-weight:700;z-index:3}
+.controls{position:fixed;right:22px;bottom:20px;display:flex;gap:10px;z-index:10}
+button{border:0;border-radius:999px;background:#fff;color:#145326;padding:12px 18px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #a8ce8c}
+button:hover{transform:translateY(-2px)}.counter{position:fixed;left:22px;bottom:22px;color:#fff;background:#082e18aa;padding:9px 14px;border-radius:30px;font-weight:800;z-index:10}
+.progress{position:fixed;top:0;left:0;height:5px;background:#f4ad2e;width:0;z-index:20;transition:width .25s}
+.photo{position:absolute;right:6%;bottom:8%;width:33%;max-height:55%;object-fit:cover;border-radius:26px;border:6px solid white;box-shadow:0 16px 35px #052c18aa}
+.center{text-align:center;align-items:center}.center p{max-width:850px}
+@media(max-width:760px){
+ .slide{padding:5vh 6vw 10vh}.hero .poster{position:relative;right:auto;top:auto;height:auto;width:min(68vw,330px);max-width:100%;max-height:40vh;margin:22px auto 0;display:block}.hero .copy{max-width:100%;text-align:center}.hero{justify-content:flex-start!important;overflow:auto}
+ .grid,.timeline{grid-template-columns:1fr;gap:10px}.tile{min-height:auto;padding:15px 18px}.event{grid-template-columns:95px 1fr;padding:12px}.photo{position:relative;right:auto;bottom:auto;width:70%;max-height:28vh;margin:15px auto}.footer{font-size:10px}.controls{right:12px;bottom:12px}.counter{left:12px;bottom:15px}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main class="deck" id="deck">
+<section class="slide hero active">
+ <div class="copy">
+  <div class="eyebrow">UPTD Puskesmas Geyer 2 mempersembahkan</div>
+  <h1>DOLAN<br>GAYENG!</h1>
+  <h2 style="color:#e8ffc7;font-size:clamp(25px,3.5vw,46px)">Bareng UPTD Puskesmas Geyer 2</h2>
+  <div class="pill date">📅 Minggu, 29 November 2026</div>
+  <p style="font-weight:800;margin-top:22px">River Tubing Cokro • Klaten</p>
+ </div>
+ <img class="poster" src="assets/poster-dolan-gayeng.png" alt="Poster Dolan Gayeng di Umbul Cokro Tubing">
+ <div class="footer"><span>Teman Sehat, Keluarga Hebat</span><span>DOLAN GAYENG 2026</span></div>
+</section>
+<section class="slide">
+ <div class="eyebrow">01 / Awali perjalanan</div><h2>Siap-siap berangkat!</h2>
+ <div class="grid">
+  <div class="tile"><small>06.00 – 07.00</small><strong>Berkumpul & cek kesiapan</strong><span>Cek peserta dan perlengkapan di titik kumpul Puskesmas Geyer 2.</span></div>
+  <div class="tile"><small>07.00 – 09.30</small><strong>Perjalanan menuju Cokro</strong><span>Perjalanan bersama menuju River Tubing Cokro, Klaten.</span></div>
+ </div>
+ <div class="note">📍 Titik kumpul: Puskesmas Geyer 2</div>
+ <div class="footer"><span>UPTD Puskesmas Geyer 2</span><span>Perjalanan dimulai dengan semangat!</span></div>
+</section>
+<section class="slide">
+ <div class="eyebrow">02 / Persiapan tubing</div><h2>Waktunya bersiap basah-basahan!</h2>
+ <div class="grid">
+  <div class="tile"><small>09.30 – 10.30</small><strong>Registrasi & antrean tubing</strong><span>Registrasi peserta dan menunggu antrean pengarungan.</span></div>
+  <div class="tile"><small>10.30 – 11.30</small><strong>River Tubing</strong><span>Pengarungan seru di Sungai Cokro.</span></div>
+ </div>
+ <div class="note">👕 Dress code saat registrasi/tubing: baju warna kuning kunyit</div>
+ <div class="footer"><span>River Tubing Cokro</span><span>Utamakan keselamatan dan ikuti arahan pemandu</span></div>
+</section>
+<section class="slide">
+ <div class="eyebrow">03 / Rehat & acara inti</div><h2>Segarkan diri, lalu rayakan kebersamaan</h2>
+ <div class="grid">
+  <div class="tile"><small>11.30 – 12.30</small><strong>Bilas, istirahat, sholat & makan siang</strong><span>Waktu untuk membersihkan diri dan mengisi tenaga.</span></div>
+  <div class="tile"><small>12.30 – 14.00</small><strong>Acara inti di Omah Cokro</strong><span>Saatnya menikmati kebersamaan seluruh keluarga besar Puskesmas Geyer 2.</span></div>
+ </div>
+ <div class="note">👔 Dress code acara inti: bebas, rapi dan sopan</div>
+ <div class="footer"><span>Omah Cokro</span><span>Kebersamaan adalah keseruan utama</span></div>
+</section>
+<section class="slide">
+ <div class="eyebrow">04 / Persiapan pulang</div><h2>Sebelum pulang, mampir dulu!</h2>
+ <div class="grid">
+  <div class="tile"><small>14.00 – 14.15</small><strong>Persiapan melanjutkan perjalanan</strong><span>Berkumpul di parkiran Cokro.</span></div>
+  <div class="tile"><small>14.15 – 15.00</small><strong>Pusat oleh-oleh</strong><span>Kampoeng Banana • Krezzz Sidowayah</span></div>
+ </div>
+ <div class="note">🛍️ Pastikan barang bawaan dan oleh-oleh tidak tertinggal.</div>
+ <div class="footer"><span>Agenda perjalanan pulang</span><span>Kenangan dibawa, semangat tetap menyala!</span></div>
+</section>
+<section class="slide center">
+ <div class="eyebrow">05 / Sampai kembali</div>
+ <h2>Perjalanan pulang</h2><div class="bigtime">15.00 – 17.00</div>
+ <p>Perjalanan kembali menuju Puskesmas Geyer 2.</p>
+ <div class="pill">🕔 17.00 • Tiba di Puskesmas Geyer 2</div>
+ <div class="footer"><span>Terima kasih sudah ikut Dolan Gayeng</span><span>UPTD Puskesmas Geyer 2</span></div>
+</section>
+<section class="slide center">
+ <div class="eyebrow">Sampai jumpa di keseruan berikutnya</div>
+ <h1>SEHAT BARENG,<br>GAYENG BARENG!</h1>
+ <p>Terima kasih atas kebersamaan seluruh keluarga besar UPTD Puskesmas Geyer 2.</p>
+ <div class="pill">Teman Sehat, Keluarga Hebat 💚</div>
+ <p style="font-size:clamp(14px,1.5vw,19px);margin-top:24px">29 November 2026 • River Tubing Cokro, Klaten</p>
+ <div class="footer"><span>GERMAS • BerAKHLAK</span><span>UPTD Puskesmas Geyer 2</span></div>
+</section>
+</main>
+<div class="counter" id="counter">1 / 7</div>
+<div class="controls"><button id="prev" aria-label="Slide sebelumnya">← Kembali</button><button id="next" aria-label="Slide berikutnya">Lanjut →</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let index=0;
+function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===index));document.getElementById('counter').textContent=(index+1)+' / '+slides.length;document.getElementById('progress').style.width=((index+1)/slides.length*100)+'%';document.getElementById('prev').disabled=index===0;document.getElementById('next').textContent=index===slides.length-1?'Ulangi ↻':'Lanjut →'}
+document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index===slides.length-1?0:index+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(index===slides.length-1?0:index+1);if(e.key==='ArrowLeft')show(index-1)});
+let startX=0;document.addEventListener('touchstart',e=>startX=e.changedTouches[0].screenX,{passive:true});document.addEventListener('touchend',e=>{let dx=e.changedTouches[0].screenX-startX;if(Math.abs(dx)>55)show(index+(dx<0?1:-1))},{passive:true});
+show(0);
+</script>
+</body></html>
