@@ -10,7 +10,10 @@
 .deck{height:100%;width:100%;position:relative}.slide{position:absolute;inset:0;display:none;padding:5.5vh 6vw 8vh;overflow:hidden;background:linear-gradient(135deg,#0d5127,#1d8b3b 58%,#b3d94b)}
 .slide.active{display:flex;flex-direction:column;justify-content:center;animation:appear .35s ease}
 @keyframes appear{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:none}}
-.slide:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 12%,#ffffff25,transparent 28%),radial-gradient(circle at 4% 90%,#d5ff6b35,transparent 28%);pointer-events:none}
+.slide:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(5,54,24,.86),rgba(12,91,39,.78) 55%,rgba(57,119,38,.70)),url('assets/river-tubing-bg.jpg') center/cover no-repeat;pointer-events:none}
+.slide.hero:before{background:radial-gradient(circle at 88% 12%,#ffffff25,transparent 28%),radial-gradient(circle at 4% 90%,#d5ff6b35,transparent 28%)}
+.slide:not(.hero) .tile{background:rgba(255,255,255,.95);backdrop-filter:blur(4px)}
+.slide:not(.hero) .note{background:rgba(255,239,200,.97)}
 .slide>*{position:relative;z-index:1}.eyebrow{font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#eaffc7;font-size:clamp(12px,1.3vw,18px)}
 h1{font-size:clamp(42px,7.2vw,100px);line-height:.98;margin:.18em 0;color:#fff;text-shadow:0 5px 0 #155a26,0 9px 20px #052b16aa;letter-spacing:-.045em}
 h2{font-size:clamp(30px,4.6vw,62px);line-height:1.05;margin:.2em 0 .45em;letter-spacing:-.035em}
@@ -30,6 +33,14 @@ p{font-size:clamp(17px,2vw,26px);line-height:1.45;margin:.35em 0;color:#f5ffe9}
 .event strong{font-size:clamp(15px,1.7vw,22px);line-height:1.18;display:block}.event small{font-size:clamp(12px,1.25vw,16px);color:#527257;display:block;margin-top:4px}
 .note{margin-top:20px;background:#ffefc8;color:#57390c;border-left:7px solid var(--orange);padding:16px 20px;border-radius:13px;font-weight:800;font-size:clamp(15px,1.7vw,22px)}
 .bigtime{font-size:clamp(56px,9vw,120px);font-weight:1000;line-height:1;color:#fff;text-shadow:0 6px #125524}
+.pickup-wrap{margin-top:18px;padding:17px 19px;border-radius:20px;background:rgba(5,48,22,.82);border:1px solid rgba(255,255,255,.35);box-shadow:0 8px 24px #062d1680;backdrop-filter:blur(6px)}
+.pickup-heading{font-size:clamp(13px,1.4vw,18px);font-weight:1000;letter-spacing:.08em;color:#f0ffc9;margin-bottom:12px}
+.pickup-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pickup-btn{border:2px solid rgba(255,255,255,.8);background:#fff;color:#145326;padding:12px 10px;border-radius:13px;font-size:clamp(12px,1.3vw,17px);box-shadow:0 4px 0 #a8ce8c;line-height:1.2}
+.pickup-btn[aria-pressed="true"]{background:#ffd45d;border-color:#fff;color:#422d06;box-shadow:0 3px 0 #d18c16;transform:translateY(-2px)}
+.pickup-detail{display:flex;align-items:center;gap:12px;margin-top:13px;padding:13px 16px;border-radius:13px;background:rgba(255,255,255,.97);color:#17391e;font-size:clamp(15px,1.7vw,21px);font-weight:900;min-height:52px}
+.pickup-detail .pin{font-size:23px}
+
 .footer{position:absolute;bottom:3.1vh;left:6vw;right:6vw;display:flex;justify-content:space-between;align-items:center;color:#efffe4;font-size:13px;font-weight:700;z-index:3}
 .controls{position:fixed;right:22px;bottom:20px;display:flex;gap:10px;z-index:10}
 button{border:0;border-radius:999px;background:#fff;color:#145326;padding:12px 18px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #a8ce8c}
@@ -39,7 +50,7 @@ button:hover{transform:translateY(-2px)}.counter{position:fixed;left:22px;bottom
 .center{text-align:center;align-items:center}.center p{max-width:850px}
 @media(max-width:760px){
  .slide{padding:5vh 6vw 10vh}.hero .poster{position:relative;right:auto;top:auto;height:auto;width:min(68vw,330px);max-width:100%;max-height:40vh;margin:22px auto 0;display:block}.hero .copy{max-width:100%;text-align:center}.hero{justify-content:flex-start!important;overflow:auto}
- .grid,.timeline{grid-template-columns:1fr;gap:10px}.tile{min-height:auto;padding:15px 18px}.event{grid-template-columns:95px 1fr;padding:12px}.photo{position:relative;right:auto;bottom:auto;width:70%;max-height:28vh;margin:15px auto}.footer{font-size:10px}.controls{right:12px;bottom:12px}.counter{left:12px;bottom:15px}
+ .grid,.timeline{grid-template-columns:1fr;gap:10px}.tile{min-height:auto;padding:15px 18px}.event{grid-template-columns:95px 1fr;padding:12px}.photo{position:relative;right:auto;bottom:auto;width:70%;max-height:28vh;margin:15px auto}.pickup-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pickup-btn{padding:11px 7px;font-size:12px}.pickup-wrap{padding:13px}.footer{font-size:10px}.controls{right:12px;bottom:12px}.counter{left:12px;bottom:15px}
 }
 </style>
 </head>
@@ -63,7 +74,19 @@ button:hover{transform:translateY(-2px)}.counter{position:fixed;left:22px;bottom
   <div class="tile"><small>06.00 – 07.00</small><strong>Berkumpul & cek kesiapan</strong><span>Cek peserta dan perlengkapan di titik kumpul Puskesmas Geyer 2.</span></div>
   <div class="tile"><small>07.00 – 09.30</small><strong>Perjalanan menuju Cokro</strong><span>Perjalanan bersama menuju River Tubing Cokro, Klaten.</span></div>
  </div>
- <div class="note">📍 Titik kumpul: Puskesmas Geyer 2</div>
+ <div class="pickup-wrap">
+  <div class="pickup-heading">📍 PILIH TITIK PENJEMPUTAN</div>
+  <div class="pickup-buttons" role="group" aria-label="Pilih titik penjemputan">
+    <button type="button" class="pickup-btn" data-point="0" aria-pressed="false">Titik Penjemputan 1</button>
+    <button type="button" class="pickup-btn" data-point="1" aria-pressed="false">Titik Penjemputan 2</button>
+    <button type="button" class="pickup-btn" data-point="2" aria-pressed="false">Titik Penjemputan 3</button>
+    <button type="button" class="pickup-btn" data-point="3" aria-pressed="false">Titik Penjemputan 4</button>
+  </div>
+  <div class="pickup-detail" id="pickupDetail" aria-live="polite">
+    <span class="pin">📍</span>
+    <span id="pickupName">Pilih salah satu tombol untuk melihat lokasi penjemputan.</span>
+  </div>
+</div>
  <div class="footer"><span>UPTD Puskesmas Geyer 2</span><span>Perjalanan dimulai dengan semangat!</span></div>
 </section>
 <section class="slide">
@@ -117,6 +140,20 @@ function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s
 document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index===slides.length-1?0:index+1);
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(index===slides.length-1?0:index+1);if(e.key==='ArrowLeft')show(index-1)});
 let startX=0;document.addEventListener('touchstart',e=>startX=e.changedTouches[0].screenX,{passive:true});document.addEventListener('touchend',e=>{let dx=e.changedTouches[0].screenX-startX;if(Math.abs(dx)>55)show(index+(dx<0?1:-1))},{passive:true});
+const pickupLocations = [
+  "Halaman UPTD Puskesmas Geyer 2",
+  "Perempatan Monggot",
+  "Pendem, Sumberlawang",
+  "Entrance/Exit Tol Gondangrejo"
+];
+document.querySelectorAll('.pickup-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const selectedIndex = Number(btn.dataset.point);
+    document.querySelectorAll('.pickup-btn').forEach(item => item.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+    document.getElementById('pickupName').textContent = pickupLocations[selectedIndex];
+  });
+});
 show(0);
 </script>
 </body></html>
